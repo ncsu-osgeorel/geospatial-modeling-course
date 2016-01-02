@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>GIS/MEA582: Geospatial Modeling and Analysis</title>
+
+<link rel="shortcut icon" href="./img/favicon.ico" />
+
+<link href="layout.css" rel="stylesheet" type="text/css" media="screen">
+<link href="style.css" rel="stylesheet" type="text/css" media="screen">
+
+</head>
+
+<body>
+
+<div id="outercontainer">
+<div id="container">
+
+<header>
+<div id="header-image">
+    <h1>NCSU GIS/MEA582:<br>Geospatial Modeling and Analysis</h1>
+</div>
+
+<nav>
+<ul class="nav">
+<li><a href="index.html">Syllabus</a></li>
+<li><a href="schedule.html">Schedule</a></li>
+<li><a href="logistics.html">Course logistics</a></li>
+<li><a href="lectures.html">Lectures</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="projects.html">Projects</a></li>
+</ul>
+</nav>
+
+</header>
+
+<main>
+
+<!-- This is a generated file. Do not edit. -->
+<h2>Comments, questions and answers for assignments</h2>
+
+
+<h3 id="data_acquisition">Data acquisition and integration</h3>
+
+<dl class="qa">
+
+<dt>Should we list and provide information about all the files
+in each Location and geodatabase, or a subset?</dt>
+<dd>
+As the instructions for HW indicate you should be able
+to write the text of your report on 1 page (500 words), so rather than listing
+properties for each file you should provide a general description
+that will characterize the data. For example,
+after looking at most of the data in the data set, are you able to generalize some
+common properties?  are all the data local? regional? do they have all same level of detail?
+do they represent natural or anthropogenic features? how are they georeferenced?
+The goal in this assignment is to ensure that the students understand the basic properties
+of digital geospatial data and can make general observations and conclusions based
+on broad range of specific technical information.
+The reports will get more meaningful for more complex
+assignments - the first ones are just a warm up.
+In the approach section - do not write about software issues, focus on general methodology,
+in the results sections focus on what is interesting in the data and the derived maps.
+Put software issues, including fixes and suggestions for improvements into
+the discussion section.
+
+<dt>When I open GRASS, <code>nc_spm_08</code> doesn't show up under "Project Locations",
+although it is downloaded and unzipped on my computer.</dt>
+<dd>
+Make sure that when you unzip your <code>nc_spm_08</code> is not hidden under another <code>nc_spm_08</code>.
+Some zip software tools create an extra directory by default, so you need to specify
+that you do not want a new directory created.
+Otherwise you end up with something like <code>C:\grassdata\nc_spm_08\nc_spm_08</code>
+and if you then give GRASS path to GRASS GIS database as <code>C:\grassdata</code>
+it still does not see the correct <code>nc_spm_08</code>
+(it checks for the folder <code>PERMANENT</code> under <code>nc_spm_08</code>
+to find out whether it is a valid GRASS Location) and then it would not show up.
+To avoid future confusion, remove all <code>nc_spm_08</code> folders and unzip <code>nc_spm_08</code> again,
+making sure that no extra directory is created.
+
+<dt>Is there a way to reorder the layers so that this information does not become hidden?</dt>
+<dd>yes - just grab a layer with the mouse and move it where you want it to be.
+
+<dt>data were in ... geographic coordinate system</dt>
+<dd>there are no data in geographic coordinate system in the provided data set - everything is
+in State Plane coordinate system (datum:NAD83, projection:LCC)
+
+<dt>I expected the data concerning projections, coordinate systems,
+etc. to be presented in GRASS GIS more like ArcGIS.
+<dd>
+In your GRASS Location, everything is in the same coordinate system.
+You find the information about current Location by running <code>g.proj -p</code>.
+
+<dt>I did not get the XY feature to work</dt>
+<dd>Please be more specific. What did not work? Did you get an error message?
+More detailed information helps to to improve the instructions or,
+if there is a bug we can file a bug report. (And you will learn how to
+prepare bug reports too!)
+
+<dt>I was not able to figure out how to create a copy of data in GRASS GIS.</dt>
+<dd>
+In the <code>g.copy</code> dialog
+(which you get, e.g. by typing <code>g.copy</code> in <em>Command Console</em> and pressing Enter)
+Find the option (input field) for raster or vector, e.g. raster files to be copied.
+Then you need to select the "from" file using the browser and type name of "to" file.
+
+<dt>Why there is no space after comma in <code>g.copy raster=slope,myslope</code>?
+<dd>
+The comma syntax (as in <code>to,from</code>) is used in GRASS GIS a
+lot, so you should remember not to put space after comma in this case.
+Basically, the reason is that the same syntax is usable in command line
+where the space would have a meaning. Generally speaking, GRASS GIS is
+aiming at being easily used when scripting or programming in different
+languages, so this requires to be strict sometimes. Similarly,
+ArcGIS raster map calculator, it requires spaces here and there,
+e.g. around operators. On the other hand, GRASS GIS raster map calculator
+does not require spaces because there is just no advantage in requiring them.
+However they are considered as a good practice
+when used around operators and after comma.
+
+<dt>I am getting Error "mygeology" map layer already exists.</dt>
+<dd>Give your output a new name
+or you can force overwrite by adding <code>--o</code> to your command
+(this applies to practically all GRASS commands). There is an equivalent overwrite
+checkbox in each module's GUI.
+
+<dt>Image rendering in GRASS GIS is slow.
+<dd>
+check your region and make sure you have it set up as given in the instructions
+and then zoom to computational region - these are small data sets so they should
+be displayed instantly when added to the map layer.
+Also, do not keep large number of layers in the <em>Layer Manager</em>, start each assignment
+with empty list and if you accumulate many layers (10+) remove those that you don't need.
+
+<dt>Do I have to use 3D views?</dt>
+<dd>
+Yes, please save the image of your 3D view (aka NVIZ) so that
+I can see that you can work with it. We will be using 3D views a lot.
+Save the NVIZ image as TIFF file, make sure you have a TIFF support installed
+on your computer, otherwise when you try to open the file, it will be black.
+If you can't work with TIFFs, just take a screenshot.
+
+<dt>Should I include my name inside the report or to the filename?</dt>
+<dd>
+Include your name on the first page of your report
+and see <a href="logistics.html">Course logistics</a> for filename conventions.
+
+<dt>Can I use data with different projections at the same time?
+<dd>
+GRASS GIS manages integrity of the data by allowing to work with data in
+one projection at the time (i.e. it considers on-the-fly projection as
+such a bad practice, that it doesn't allow it at all) and it also
+requires you to import the data, to have all the data in one format,
+e.g. to store vector data in GRASS topological format.
+
+<dt>How the geospatial data are organized in GRASS GIS?
+<dd>
+The data are
+stored in GRASS Location and you can work with one Location at the
+time, it is similar concept to database (speaking, e.g. about relational
+databases). GRASS Location is divided into Mapsets. This is a way how
+to organize your data. Common data are in special PERMANENT Mapset.
+Other Mapsets contain the data related to one task, or project, for
+example one class assignment. You always work in one Mapset and you can
+access data in PERMANENT Mapset, however you cannot change them which
+protects you from deleting or overwriting the data accidentally.
+Optionally, you can access the data in other Mapsets within the same
+GRASS Location but again, only for reading. Obviously, you cannot
+access Mapsets from other GRASS Locations because they might not be in
+the same projection. This also means that it is always defined where
+the new data will be created and that's the current Mapset. The result
+is that once the data are imported, one can focus on analysis, not data
+formats. In fact, you can link the data from different sources such as
+GeoTIFF or PostGIS database but that's a different story.
+
+</dl>
+
+
+
+<h3 id="data_visualization">Data display and visualization</h3>
+
+<dl class="qa">
+
+<dt>I'm not sure what setting the grid parameters "size=0:02" did.</dt>
+<dd>
+It draws the lat/long grid - you should read the numbers along the image broder to find out.
+Maps used to provide both x/y grid in meters and lat/long in degrees:min:sec so that
+both cartesian and geographic coordinates could be derived.
+
+<dt>What is the ArcGIS equivalent to setting the computational region in GRASS GIS?</dt>
+<dd>rather than clipping the data set,
+which would be a pain if you need to use many data sets with different
+spatial extent and if you need to work on different regions (you would be
+also creating a lot of extra files) is under:
+Environments > General Settings > Extent
+
+<dt>When I run GRASS command for the second time, it gives me an error?
+<dd>
+You probably already created the raster or vector maps by the first run
+and now GRASS don't want you to loose the already cleated data.
+Deleting or replacing the data usually requires additional action
+to be taken by the user (i.e., you) and it is the preferred behavior
+over simple removal of the previously created data.
+Check the behavior of your system's file manager when you try to copy
+a file somewhere and the file already exists and same would apply,
+e.g. to saving a document in a text editor.
+
+
+<dt>Why we just don't use very high resolution for all raster data?
+<dd>
+When you have low resolution (big cells) it does not necessary mean
+that it is worse. Sometimes we can even rescale hight resolution data
+because we don't need the precision because other data for analysis are
+in the lower resolution or because we are hitting some storage limits.
+Re-scaling to higher resolution (smaller cells) does not give use more
+precise information, although the image might be smoother. Similarly,
+when comparing raster and vector, it is important to realize that there
+both has limited (spatial, yx) precision and although the area boundary
+in vector looks nicer it might be much less accurate then the raster
+representation depending on how the data were acquired.
+
+<dt>GRASS GIS Map Display is not using my system default font.
+    Is there any way to change it?
+<dd>You can change the default font used in Map Display by going to
+the main menu > Settings > Preferences > Map Display tab and click Set font
+button. Select name of any font you like.
+
+<dt>The maps composed in GRASS GIS Map Display are not good enough for me.
+    Is there something else I can use?
+<dd>
+Advanced cartography in GRASS GIS is done in completely separate
+application/module called <em>GRASS GIS Cartographic Composer</em>
+(which is a GUI frontend for <em>ps.map</em> module). However, some
+users stay just with the GRASS GIS <em>Map Display</em>
+because it is easily scriptable thanks to display modules (<em>d.*</em>)
+or they combine it with <a href="https://inkscape.org">Inkscape</a>.
+Some other GRASS GIS users, however, use <a href="http://qgis.org">QGIS</a> for
+high-quality cartography tasks.
+
+<dt>I cannot change or create data in my other Mapsets, only in the current one.
+<dd>
+That's how it should be. GRASS GIS is always connected to
+one GRASS Location inside a GRASS Database. GRASS Location contains
+multiple GRASS Mapsets and you can access data in any of these Mapsets.
+However, you can change (create, modify, delete) the data only in a
+current Mapset (that's why you start GRASS session with combination of
+database-location-mapset). Data can be copied into current Mapset using
+<em>g.copy</em> if you need to modify them (e.g. attributes of a vector map).
+By default, you see data only in the current Mapset and in the
+PERMANENT Mapset (that's the special thing about PERMANENT Mapset).
+
+<dt>When using GRASS GIS, can I access data in different Mapset or Location?
+<dd>
+If desired, you can show data from other Mapsets (in the current
+Location) using Settings > GRASS working environment > Mapset access.
+This helps to maintain safety of data and gives a system to organize
+the data. Data in other Locations are accessible only if you start
+GRASS session in the Location. Accessing data from multiple Location
+wouldn't be safe because data in different Locations are (can be) in
+different coordinate systems (while all Mapsets in one Location
+contains data in one particular coordinate system).
+
+</dl>
+
+
+<h3 id="map_algebra">Global, zonal and focal operations, map algebra</h3>
+
+<dl class="qa">
+<dt>What is happening when (computational) region is set?</dt>
+<dd>
+   It sets the spatial extent AND resolution at which all raster operations are done.
+   If any of the rasters has different resolution, it is quietly resampled using nearest neighbor.
+   It also sets the viewing area of the <em>Map Display</em>
+   when the option <em>Zoom into computational region</em> is selected.
+   It does not affect vector operations, so vector data need to be clipped if the operation
+   is to be performed on a subset of the data.
+   However, some vector modules can work with the region when it is advantageous
+   or when rasters are involved.
+</dd>
+
+<dt>what does the difference between SRTM and NED DEMs mean?</dt>
+<dd>
+    SRTM represents surface with vegetation and buildings, while NED is derived from bare earth lidar data,
+    so it is lower in most areas. The issue is complicated by the fact, that in SRTM v1
+surface water was assigned value 0 instead of NULL or actual value (there were no data),
+so lakes have the elevation value 0 leading the large negative difference. Both DEMs are properly
+georeferenced to the same vertical datum.
+
+<dt>What is happening in the map algebra example with relative coordinates?
+<dd>
+South-east corner is replaced.
+
+<dt>How we got from the computer raster to the plane? How would I use it?</dt>
+<dd>
+We are computing an equation for a plane here:
+ax+by+cz+d=0 which we can rewrite as <br>
+z = -1/c (ax + by) - d/c
+and use it to model, for example, a geologic fault.
+
+<dt>NDVI computed with integers gives 0 in GRASS and -1, 0 in ArcGIS, what is going on?</dt>
+<dd>
+The correct values for NDVI range between (-0.957, 0.979) so
+when the decimals are simply cut-off the result is 0, when the numbers are rounded down to nearest
+integer the result will be -1,0. Neither of them is correct.
+
+<dt>Subsetting a raster using map algebra - what is happening there?</dt>
+<dd>
+we set the spatial extent to orthophoto and resolution to 10m (that means that the 1m resolution
+of ortho is ignored). Then we compute a new raster by assigning it the same values
+as in the original raster only within the defined spatial extent. So the resulting
+map has the spatial extent of the orthophoto but the values and resolution are the same as in
+the original raster.
+
+</dl>
+
+
+<h3 id="buffers_cost">Buffers, cost surfaces, least cost path</h3>
+
+<dl class="qa">
+
+<dt>Can I manually set region by drawing a rectangle on the map in display window?</dt>
+<dd>
+       yes, zoom to the area of interest using the Zoom in button and drawing
+       a rectangle and then click <em>Zoom options > Save display geometry to named region file</em>, e.g. <code>myregion</code>.
+       You can then set your region to this using <code>g.region myregion</code> or
+       by running <em>Config > Region > Set Region > Set from named region > myregion</em>.
+       Update for GRASS GIS 7: Find toolbar button 'Various zoom options' on Map Display toolbar,
+       select 'Set computational region extent interactively' and then draw the rectangle.
+
+<dt>What the internal structure is of a GRASS raster, where is category list stored?
+<dd>
+       We have talked about it in the first lecture, but you can find it in the
+       <a href="http://grass.osgeo.org/grass70/manuals/helptext.html">GRASS GIS manual</a> too.
+       If you are really interested you can look to the directories yourself.
+       Categories are under <code>cats</code> directory,
+       color tables under <code>colr</code>,
+       and history and other metadata in <code>hist</code>.
+       These are all ASCII files so they are readable and editable as plain text.
+       Never, ever edit these files unless you know what you are doing, you can corrupt your data,
+       use the relevant commands instead.
+
+<dt>I would have thought that I could have used the streets layer as a mask to contain
+        all analysis to the roads system itself and still arrive at the same results.
+        To my surprise, this was not the case. Why would areas outside the road system
+        have such an impact on travel time and shortest path within this analysis?</dt>
+<dd>
+        I would have to see your results to say for sure,
+        it should be the same if the firestations were all located on the roads, but they
+        are not. They are located off-the road and they are not connected to the street network.
+        So you need to get them from the points reprsenting the stations onto the road,
+        either snaping them to the road (which may require manual aditing) or have the algorithm
+        find the least cost path to the road by assigning off-road areas some low speed value.
+        Depending on where the firestation is located in relation to the roads, the two approaches
+        may lead to different paths.
+
+<dt>Coordinates of firestations are not stored in the attribute table. Where do they come from?</dt>
+<dd>
+       v.out.ascii pulls them from the coor file that defines the geometry of each vector map
+       and combines them with attributes from the SQLite table (or any other DBMS that you may use -
+       GRASS supports several).
+
+<dt>What are the friction values?</dt>
+<dd>
+       these are empirically selected values that measure how difficult it is to walk
+       through cells with different types of cover, they increase the cost to pass a grid cell.
+
+<dt>What is the best way to get the min and max raster value in GRASS?</dt>
+<dd>
+    Use <code>r.info -r</code>.
+
+<dt>In GRASS I don't get any firestations for the given condition CVLAG &lt; 0.1,
+       I had to use CVLAG &lt; 0.5 and the stations that I got were far away
+       (S. East St. and W main St stations)</dt>
+<dd>
+       you may be searching in a wrong region, reset it with <code>g.region swwake_30m -p</code>
+
+</dl>
+
+
+<h3 id="terrain_modeling">Terrain modeling</h3>
+
+<dl class="qa">
+
+<dt>Is 2m or 6m resolution more suitable for DEM from the given lidar data?</dt>
+<dd>
+    if we are going to generate the DEM using binning, e.g. mean elevation for each cell,
+    6m provides more complete coverage, but as the range map shows we lose some detail.
+    2m resolution is not suitable for generating DEM by binning - the data are not dense enough.
+    But if we interpolate (computationally more intensive task than binning)
+    we will get a more detailed DEM.
+
+<dt>mr lidar points in ArcGIS shape geodatabase were missing Z value
+<dd>
+   new version of the geodatabase with Z-value added is available on the Assignments web site
+
+<dt>The image I see in 3D in GRASS GIS is just a lot of spikes or outliers, no digital elevation model.
+<dd>
+When visualizing rasters in GRASS GIS 3D view, you have to switch off
+aspect and any other raster map layers which you don't want to show as surface.
+You can however, show any raster by draping it over a
+surface in 3D (by selecting method of coloring for a surface).
+
+<dt>When I show the TIN in GRASS GIS 3D view, I get just large spheres or flat thick plate.
+    How to view the 3D TIN.
+<dd>
+When visualizing vectors in GRASS GIS 3D view,
+go through a <em>Vector</em> section of the <em>Data</em> tab and
+check values of all the fields. In case of TIN, you probably don't want
+to show any points or set the size of points to a small number.
+Note also that depending on vector type, you need to specify if you want
+to show the features on an existing raster surface (flat plane by default)
+or as actual 3D features.
+Switching off other layers beforehand in 2D is also a good idea.
+
+<dt>When I show the raster map in GRASS GIS 3D view as a surface,
+    I cannot see much detail and the view seems not precise, coarse or blurry.
+<dd>Set fine mode resolution in 3D view tab, in the Surface part to 1
+    to get the surface in the actual (full, native) resolution of the raster.
+
+<dt>What does the fine mode resolution in GRASS GIS 3D mean?
+<dd>Fine mode resolution in 3D is resolution of resampling when using
+    the raster in 3D, for example fine mode resolution 2 means that raster
+    with resolution 3 is shown as if it would have resolution 6.
+    This is for performance purposes. To see raster in its full (native)
+    resolution, use fine mode resolution 1.
+
+</dl>
+
+
+<h3 id="interpolation_1">Spatial interpolation and approximation</h3>
+
+<dl class="qa">
+
+<dt>How to design an experiment to test IDW with different parameters?</dt>
+<dd>
+Run the command with the suggested parameters and then compare the results
+visually and statistically using shaded relief (hillshade), contours, univariate statistics
+and histograms. For example, you should be able to conclude that the lower
+the number of points, the rougher the surface
+The univariate statistics shows almost no difference
+illustrating the fact that summary statistics does not reveal subtle but
+significant differences in surface geometry.
+
+</dl>
+
+
+<h3 id="interpolation_2">Spatial interpolation and approximation: splines</h3>
+
+<dl class="qa">
+
+<dt>GRASS defines spline method as regularized spline with tension,
+while ArcGIS defines spline method with two functions, regularized and tension.
+It seems the functions from these two software are different when both state
+it is a spline interpolation method.</dt>
+<dd>
+There are many different spline interpolation methods based on what type
+of smoothness seminorm (also called roughness penalty) they minimize, see
+<a href=" http://skagit.meas.ncsu.edu/~helena/gmslab/papers/mitas_mitasova_1999_2005.pdf">
+Table 1 in this paper</a>
+(this paper has lot of typos as we were not given the proofs after the chapter was typeset,
+but it has a good overview of interpolation methods,
+note that in Table 1 regular should be regularized, and the spline by Hutchinson in Topo to grid
+is thin plate spline with tension, not just thin plate spline).
+Regularized spline with tension is equivalent
+to completely regularized spline but the others are different.
+
+<dt>Another confusion I have is radial basis functions.
+Radial basis function methods are part of spline method?
+Or some are spline (thin-plate spline, spline with tension,
+and completely regularized spline), and some are not?</dt>
+<dd>
+Splines are a special type of radial basis function methods, multiquadrics is another group RBF methods.
+But there are also splines that are smoothly connected piecewise polynomials
+that we have not covered at all (they are applied to meshes which are not very well supported in GIS).
+
+<dt>And does spline with tension under radial basis functions create
+the same results from spline interpolation with tension type?</dt>
+<dd>
+Spline with tension under radial basis functions and the one in Spatial Analyst are probably
+based on the same equations but the implementation may be different
+so unless it calls the same code, the results will be different
+( e.g. the data are usually normalized to avoid numerical problems
+and each program does it differently, and the search for points may be different too - we
+covered that in the lecture.)
+
+</dl>
+
+
+<h3 id="terrain_analysis">Spatial and Temporal Terrain analysis</h3>
+
+<dl class="qa">
+
+<dt>In the time series analysis task my surfaces are fuzzy and the cutting plane does not work.</dt>
+<dd>
+Make sure you set display to computational region and use fine resolution=1 in nviz.
+When using cutting planes both surfaces should have their resolution set to same value (e.g. fine=1),
+use constant plane for reference (-1m for the coast) and set its resolution to fine=1 too.
+When comparing two surfaces assign each of them different constant color
+and use top or bottom surface option to color the cutting plane. You can lower your light source
+and reduce its brightness to create contrast between the cross-section and the surface if you
+are coloring the cross-section using the top surface option.
+
+</dl>
+
+<!--
+<hr>
+<P><B>
+<a name="Solar"></a>
+Topic: Viewshed, solar potential analysis
+</h3>
+<dl class="qa">
+     <LI>compute viewshed area from a building on CC and from RBC tower, compare areas,
+         find visible points of interest, optionally compare the results from SRTM and NED</li>
+     <LI>compute cast shadows for a given area with a building for 3 different times
+          on December 22 </li>
+     <LI>compute summary radiation for summer and winter solstice days in a given area</li>
+</dl>
+<hr>
+<a name="Flow"></a>
+<h3 id>Flow routing, watershed analysis</b>
+<dl class="qa">
+    <LI>compute streams and watersheds from NED
+        D8, SFD with least cost path routing and compare with official stream data</li>
+    <LI>map DEM depressions and compare them with existing lakes</li>
+    <LI>compute and compare flow accumulation maps derived by D8, Dinf <li>
+    <LI>compute DEM with carved stream and show its impact on flow accumulation map </li>
+    <LI>extract watershed boundaries for a given outlet</li>
+    <LI>derive flowlines and flow path length using downslope and upslope flowtracing</li>
+    <LI>compute flooded area from given seed point at given flood level</li>
+</dl>
+<hr>
+<a name="Hydro"></a>
+<h3 id>Modeling Geospatial Processes: Hydrologic and erosion modeling
+</h3>
+<P><B> Tasks: Compute wetness index, soil detachment and net erosion deposition maps</h3>
+<UL>
+      <LI>compute wetness index
+      <LI>compute and compare erosion topographic factor based on hillslope length and on contributing area </LI>
+      <LI>derive soil erodibility and land cover maps for different land use alternatives</LI>
+      <LI>dompute erosion, sediment transport and deposition for different land use alternatives</LI>
+     </UL>
+<b>Approach</b>
+<hr>
+<P>
+<b>Various project related material</b>
+<br>
+<a href="../GIS_anal_grass/GIS_Anal_grcstransform.html">Reproject data, start a new project </a>
+<br>
+<a href="../GIS_anal_grass/GIS_Anal_grworkflows.html"> Automate GRASS workflows, process large point clouds </a>
+<br>
+<a href="../GIS_anal_grass/GIS_Anal_grsimwe.html"> Surface runoff and erosion simulation</a>
+<a href="../GIS_anal_grass/WorkflowGRASS_09.sh"> Script to run the flowrouting homework on MSWindows
+including d.* commands </a>
+<br> <a href="CLIforWinGRASS.ppt"> Get command line working on MS Windows [ppt]</a>
+<br>
+-->
+
+</main>
+
+<footer>
+
+<nav>
+<ul>
+<li><a class="term-changes" href="https://moodle1516-courses.wolfware.ncsu.edu/course/view.php?id=4344">Moodle site</a></li>
+<li><a href="http://help.ncsu.edu/">Computing Help</a></li>
+<li><a href="http://geospatial.ncsu.edu/">GIST Home</a></li>
+<li><a href="http://www.ncsu.edu/policies/prr-disclaimer.php">Disclaimer</a></li>
+<li><a href="http://oit.ncsu.edu/itaccess">Accessibility</a></li>
+<!--
+<li><a href="https://github.com/ncsu-osgeorel/grass-intro-workshop" target='_blank'>GitHub repository</a></li>
+-->
+<li>
+    <a href="https://github.com/ncsu-osgeorel/geospatial-modeling-course" title="Source code for web pages on GitHub">
+        <img src="img/github_logo.png" alt="GitHub Octocat logo">
+    </a>
+</li>
+<li title="Copyright and license (not applicable to linked materials)">
+    &copy; 2015
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+    <a href="http://geospatial.ncsu.edu/osgeorel/">NCSU OSGeoREL</a>
+</li>
+</ul>
+</nav>
+
+</footer>
+
+</div>
+</div>
+
+</body>
+</html>
+

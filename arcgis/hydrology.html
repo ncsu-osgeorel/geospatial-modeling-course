@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>GIS/MEA582: Geospatial Modeling and Analysis</title>
+
+<link rel="shortcut icon" href=".././img/favicon.ico" />
+
+<link href="../layout.css" rel="stylesheet" type="text/css" media="screen">
+<link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+
+</head>
+
+<body>
+
+<div id="outercontainer">
+<div id="container">
+
+<header>
+<div id="header-image">
+    <h1>NCSU GIS/MEA582:<br>Geospatial Modeling and Analysis</h1>
+</div>
+
+<nav>
+<ul class="nav">
+<li><a href="../index.html">Syllabus</a></li>
+<li><a href="../schedule.html">Schedule</a></li>
+<li><a href="../logistics.html">Course logistics</a></li>
+<li><a href="../lectures.html">Lectures</a></li>
+<li><a href="../assignments.html">Assignments</a></li>
+<li><a href="../projects.html">Projects</a></li>
+</ul>
+</nav>
+
+</header>
+
+<main>
+
+<!-- This is a generated file. Do not edit. -->
+<h2>Flow routing and watershed analysis</h2>
+<p>Resources:
+<a href="http://www.lib.ncsu.edu/gis/virtcamp.html">ESRI virtual campus</a>
+
+<p>
+Create the assignment working directory (folder) .\Assign11<br>
+Start ArcMap<br>
+
+<pre>
+Start->Programs->ArcGIS->ArcMap
+</pre>
+
+<h3>Derive flow pattern and streams from 10m NED</h3>
+
+Fill the sinks in DEM:
+
+<pre>
+In ArcMap: add the raster feature layer ncrast.mdb/elev
+Open the ArcToolbox
+Select 'Spatial Analyst Tools->Hydrology->Fill'
+Set 'Input' to 'elev'
+Set 'Output Raster' to '.\Assign11\Fill_elev1'
+Click 'OK'
+</pre>
+
+<p>
+Compute flow direction:
+
+<pre>
+In ArcToolbox
+Select 'Spatial Analyst Tools->Hydrology->FlowDirection'
+Set 'Input' to 'Fill_elev1'
+Set 'Output Raster' to '.\Assign11\FlowDir_fill1'
+Click 'OK'
+</pre>
+
+<p>
+Compute flow accumulation:
+
+<pre>
+In ArcToolbox
+Select 'Spatial Analyst Tools->Hydrology->FlowAccumulation'
+Set 'Input' to 'FlowDir_fill1'
+Set 'Output Raster' to '.\Assign11\FlowAcc_fill1'
+Click 'OK'
+</pre>
+
+<p>
+Change the color table to something better -
+e.g. yellow-green-blue, histogram equalized works well.<br>
+If the resolution of your screen is not good enough to see connected streams,
+zoom-in to see the detail.<br>
+Compare with streams digitized from high resolution orthophoto:
+
+
+<pre>
+In ArcMap add ncshape.mdb/streams
+</pre>
+
+<p>
+Change color to red: <span class="question">how do the derived streams fit with the digitized data?</span>
+
+<p>
+Derive drainage basins:
+<pre>
+
+In ArcToolbox
+Select 'Spatial Analyst Tools->Hydrology->Basin'
+Set 'Input' to 'FlowDir_fill1'
+Set 'Output Raster' to '.\Assign11\Basins_fill1'
+Click 'OK'
+</pre>
+
+<p>
+Derive flow path length:
+
+<pre>
+In ArcToolbox
+Select 'Spatial Analyst Tools->Hydrology->FlowLength'
+Set 'Input' to 'FlowDir_fill1'
+Set 'Output Raster' to '.\Assign11\flowlength'
+Click 'OK'
+</pre>
+
+<h3>Derive stream network and watersheds from 30m NED</h3>
+First check whether we have sinks, if yes, fill them in.
+Then compute flow direction and flow accumulation.<br>
+Extract streams from flow accumulation using map algebra
+and create stream links from the stream raster and derive watersheds
+draining into these stream links:
+
+
+<pre>
+In ArcMap:
+
+Set your workspace and scratch workspace to C:\path\.Assign11
+Add ncrast/elev_ned
+Compute FlowDirection input=elev_ned output=FlowDir_el30
+Compute Sink input=FlowDir_el30 output=sinks30
+Compute Fill input=elev_ned output=Fill_elev30
+Compute FlowDirection input=Fill_elev30 output=FlowDir_fil30
+Compute FlowAccumulation input=FlowDir_fil30 output=Flowacc_fil30
+Using the Algebra Raster Calculator, compute:
+Con( "Flowacc_fil30" > 10000, 1, 0 ) Set the output to: Streams_der30
+Compute StreamLink input=Streams_der30 flow dir raster=FlowDir_fil30 output=Source30
+Compute Watershed input=FlowDir_fil30 Pour point=Source30 output=Watersheds30
+</pre>
+
+</main>
+
+<footer>
+
+<nav>
+<ul>
+<li><a class="term-changes" href="https://moodle1516-courses.wolfware.ncsu.edu/course/view.php?id=4344">Moodle site</a></li>
+<li><a href="http://help.ncsu.edu/">Computing Help</a></li>
+<li><a href="http://geospatial.ncsu.edu/">GIST Home</a></li>
+<li><a href="http://www.ncsu.edu/policies/prr-disclaimer.php">Disclaimer</a></li>
+<li><a href="http://oit.ncsu.edu/itaccess">Accessibility</a></li>
+<!--
+<li><a href="https://github.com/ncsu-osgeorel/grass-intro-workshop" target='_blank'>GitHub repository</a></li>
+-->
+<li>
+    <a href="https://github.com/ncsu-osgeorel/geospatial-modeling-course" title="Source code for web pages on GitHub">
+        <img src="../img/github_logo.png" alt="GitHub Octocat logo">
+    </a>
+</li>
+<li title="Copyright and license (not applicable to linked materials)">
+    &copy; 2015
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+    <a href="http://geospatial.ncsu.edu/osgeorel/">NCSU OSGeoREL</a>
+</li>
+</ul>
+</nav>
+
+</footer>
+
+</div>
+</div>
+
+</body>
+</html>
+

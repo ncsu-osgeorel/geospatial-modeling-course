@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>GIS/MEA582: Geospatial Modeling and Analysis</title>
+
+<link rel="shortcut icon" href="./img/favicon.ico" />
+
+<link href="layout.css" rel="stylesheet" type="text/css" media="screen">
+<link href="style.css" rel="stylesheet" type="text/css" media="screen">
+
+</head>
+
+<body>
+
+<div id="outercontainer">
+<div id="container">
+
+<header>
+<div id="header-image">
+    <h1>NCSU GIS/MEA582:<br>Geospatial Modeling and Analysis</h1>
+</div>
+
+<nav>
+<ul class="nav">
+<li><a href="index.html">Syllabus</a></li>
+<li><a href="schedule.html">Schedule</a></li>
+<li><a href="logistics.html">Course logistics</a></li>
+<li><a href="lectures.html">Lectures</a></li>
+<li><a href="assignments.html">Assignments</a></li>
+<li><a href="projects.html">Projects</a></li>
+</ul>
+</nav>
+
+</header>
+
+<main>
+
+<!-- This is a generated file. Do not edit. -->
+<h2>Lectures</h2>
+
+<h3>Introduction and course logistics</h3>
+
+Outline:
+<ul>
+    <li>introduction
+    <li>read <a href="logistics.html">Course logistics</a>
+</ul>
+
+
+<h3 id="data_acquisition">Data acquisition and integration</h3>
+
+Outline:
+<ul>
+    <li>mapping natural phenomena, concept of continuous fields and discrete sampling</li>
+    <li>on-ground/in-situ, airborne, satellite, and lidar data acquisition</li>
+    <li>projections, coordinate transformations, georeferencing</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Ldata.ppt">Lecture Slides </a> (#1-22)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureMapping_ed.mov">
+          Lecture_Mapping</a> (ppt+audio 37MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureGeoreferencing_ed.mov">
+         Lecture_Georeferencing</a> (ppt+audio 47MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="http://www.progonos.com/furuti/MapProj/Normal/TOC/cartTOC.html">Cartographical Map Projections</a>
+    <li><a href="http://ncsu-osgeorel.github.io/foss-for-geospatial-analysis/intro-to-foss.html">Introduction to Open Source for Geospatial Analysis and Modeling</a> (material under development)
+    <li>
+        <a href="http://www4.ncsu.edu/~vpetras/presentations/geoforum2014-foss.pdf">How Open Source Geospatial Development Works</a>
+        (<a href="https://cnr.online.ncsu.edu/online/Play/84b7f46cff9c45afa812539109630cfd1d?catalog=b73459f2-e0a5-44fd-b940-ed9e529b2334">recording</a>
+        from Geospatial Forum available at
+        <a href="https://cnr.online.ncsu.edu/online/Catalog/catalogs/geospatial-forum">NCSU</a>)
+    <li><a href="http://dx.doi.org/10.1016/j.tree.2012.03.009">Let the four freedoms paradigm apply to ecology</a> (one page letter in TREE)
+    <li><a href="http://opensource.org/faq">Open Source Initiative: FAQ</a>
+    <li>Notes on <a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/WGS84_NAD83.pdf">WGS84 and NAD83 difference</a>
+</ul>
+
+
+<h3 id="data_models">Geospatial data models</h3>
+
+Outline:
+<ul>
+    <li>raster and vector data models</li>
+    <li>raster-vector conversions and resampling</li>
+    <li>geospatial formats, conversions, geospatial data abstraction library</li>
+    <li>data repositories, metadata</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Ldata.ppt">Lecture Slides</a> (#23-60)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureRasterModel_ed.mov">
+Lecture_RasterModel</a> (ppt+audio 36MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureVectorModel_ed.mov">
+        Lecture_VectorModel</a> (ppt+audio 29MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureRastVectConv_ed.mov">
+        Lecture_RasterVectorConv</a> (ppt+audio 29MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="resources/data_providers.html">On-line geospatial data viewers and repositories</a>
+    <li><a href="resources/resampling.html">Links to additional material on resampling </a>
+</ul>
+
+
+<h3 id="data_visualization">Data display and visualization</h3>
+
+Outline:
+<ul>
+    <li>display of
+        continuous and discrete data, use of color, shading, symbols to
+        extract the spatial pattern and relationships
+    <li>3D visualization: multiple surfaces and volumes, 3D vector objects
+    <li>visualization for data analysis (lighting, zscaling, transparency, cutting planes, animations)
+    <li>Sharing data on-line
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lvisual.ppt">Lecture slides</a>
+<!--<a href="TanGeoMS2014.pptx">TanGeoMS</a>-->
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureDisplayRastVectCol1_ed.mov">
+        Lecture_Display_RasterVector</a> (ppt+audio 37MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureDisplayRastVectCol2_ed.mov">
+        Lecture_Display_Color</a> (ppt+audio 47MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureDisplay3D_ed.mov">
+        Lecture_3D visualization</a> (ppt+audio 36MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureDisplay3Danim_ed.mov">Lecture_3D animation</a> (ppt+audio 97MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/dynamicgis/dynamicgis.html">Dynamic GIS</a>
+        (html slides)
+    <li><a href="http://www.reliefshading.com/">Relief shading</a>
+    <li><a href="http://colorbrewer2.org/">ColorBrewer</a>
+    <li><a href="http://geospatial.ncsu.edu/osgeorel/tangible-landscape.html">Tangible Landscape</a>
+        (NCSU OSGeoREL project)
+    <li><a href="http://geospatial.ncsu.edu/osgeorel/multidim-geovis.html">Dynamic and wrap-around visualizations</a>
+</ul>
+
+
+<h3 id="map_algebra">Geospatial Analysis: Global, zonal and focal operations, map algebra</h3>
+
+Outline:
+<ul>
+    <li>global and zonal statistics
+    <li>neighborhood (focal) operations
+    <li>raster map algebra
+        <ul>
+            <li>expressions, operators, functions and variables
+            <li>basic calculations, integer and floating point data
+            <li>"if" conditions, handling NULLs and creating masks
+        </ul>
+    <li>raster map patching and overlay
+    <li>raster map reclassification and rescaling
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lmalgebra.ppt">Lecture Slides</a>
+<!--
+Optional: <a href="Mitasova_TanGIS_MEA592b.ppt"> TanGIS slides</a> and <a href="tg1bak2_ed4_1min640.mov">short video (11MB)</a>, on visualization and model interaction</p>-->
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureAnalStatsGZF_ed.mov">Lecture_GlobalZonalFocal_Stats</a> (ppt+audio 67MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureAnalMapAlg_ed.mov">Lecture_MapAlgebra_Reclass</a> (ppt+audio 64MB)
+<!--
+<li><a href="http://courses.ncsu.edu/mea582/common/media/02/tangis2_ed.mov"> Presentation_TangibleGIS (ppt+audio 69MB),</a>
+-->
+</ul>
+
+
+<h3 id="buffers_cost">Geospatial Analysis: buffers, cost surfaces, least cost path</h3>
+
+Outline:
+<ul>
+    <li>measuring distance, proximity operators
+    <li>point, line, and area buffers
+    <li>cost surfaces, least cost path
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lcost_surf.ppt">Lecture Slides used in the video</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lcost_surf2012.pptx">Lecture Slides with updates</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureDistance_ed2.mov">Lecture_Measuring distance</a> (ppt+audio 31MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureBuffers_ed.mov">Lecture_Buffers</a>
+        (ppt+audio 46MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/02/LectureCostsurf_ed.mov">Lecture_Cost surfaces</a> (ppt+audio 67MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/LCP_feature_extraction.pptx">Example feature extraction using least cost path</a>
+    <li><a href="http://gracilis.carleton.ca/CUOSGwiki/index.php/Comparative_Analysis_of_Cost_Path_Analysis_In_Grass_GIS_and_ArcMap">Additional material</a> on least cost path analysis in both GRASS GIS and ArcGIS from Carleton University
+</ul>
+
+<hr>
+
+<p>The following lectures are about <em>Geomorphometry and modeling of processes</em>.</p>
+
+
+<h3 id="terrain_modeling">Terrain modeling</h3>
+
+Outline:
+<ul>
+    <li>3D mapping technologies: topography and bathymetry</li>
+    <li>mathematical and digital terrain models</li>
+    <li>point clouds, multiple return data, CLICK, LDART</li>
+    <li>triangular irregular networks</li>
+    <li>regular grid (raster), NED, SRTM, CRM</li>
+    <li>isolines</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lterrain.pptx">Lecture Slides used in the video</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_LterrainJan2014.pptx">Lecture Slides with updates</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureTerrainMap_ed.mov">Lecture_Terrain Mapping</a> (ppt+audio 67MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureTerrainMod_ed.mov">Lecture_Terrain Modeling</a> (ppt+audio 69MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureTerrainBinning_ed.mov">Lecture_Terrain Binning</a> (ppt+audio 79MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="resources/data_providers.html">Links to elevation data repositories</a>
+<!--<li><a href="http://www.geodynamicsgroup.com/">Geodynamics - coastal mapping company</a>-->
+</ul>
+
+
+<h3 id="interpolation_1">Spatial interpolation and approximation: methods</h3>
+
+Outline:
+<ul>
+    <li>definitions, principles and applications
+    <li>selected methods and their properties
+    <!--Outline:
+<ul> <li>Voronoi polygons, TIN-based method <li>Inverse distance weighting <li>Splines, kriging)</li> </ul>-->
+    <li>influence of interpolation parameters</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Linterp.ppt">Lecture slides</a> (methods)
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/interpall.pdf">Equations</a>
+    <li><a href="http://www.spatialanalysisonline.com/output/">Equations for additional functions</a>
+        (see section 6.6.1-3,6.6.6)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureInterpDef_ed.mov">Lecture_Interpolation Definitions</a> (ppt+audio 51MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureInterpMeth_ed.mov"> Lecture_Interpolation Methods</a> (ppt+audio 67MB)
+</ul>
+
+
+<h3 id="interpolation_2">Spatial interpolation and approximation: splines, point selection</h3>
+
+Outline:
+<ul>
+    <li>influence of spline interpolation parameters: tension/range and smoothing</li>
+    <li>implementation - point selection techniques</li>
+    <li>special cases: contours, profiles, anisotropy</li>
+    <li>trivariate interpolation of volumes and topo-climatology</li>
+    <li>evaluating interpolation accuracy, crossvalidation</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_LinterpS2f.ppt">Lecture slides</a> (splines, point selection)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureInterpSpline_ed.mov">Lecture_Interpolation Splines</a> (ppt+audio 97MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/03/LectureInterpSegm_ed.mov">Lecture_Interpolation Point selection</a> (ppt+audio 67MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/mitas_mitasova_1999_2005.pdf">Overview of interpolation methods</a> (book chapter)
+    <li><a href="http://www.spatialanalysisonline.com/output/">Equations for additional functions</a>
+        (see section 6.6.4)
+</ul>
+
+
+<h3 id="terrain_analysis">Spatial and temporal terrain analysis</h3>
+
+Outline:
+<ul>
+    <li>summary parameters: volumes, surface areas</li>
+    <li>first and second order point parameters: general approach</li>
+    <li>methods for slope, aspect and curvatures using polynomial and spline approximation</li>
+    <li>combining parameters to map landforms and terrain features</li>
+    <li>computing parameters from noisy data, accuracy and uncertainty, scale and level of detail</li>
+    <li>raster time series analysis, quantification of coastal change</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Ltopoanal.ppt">Lecture Slides</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureTopoanalGradient_ed.mov">Lecture_Topoanalysis_Gradient parameters</a> (ppt+audio 74MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureTopoanalCurvature_ed.mov">Lecture_Topoanalysis_Curvature parameters</a> (ppt+audio 74MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureTopoanalSeries_ed.mov">Lecture_Topoanalysis Time Series</a> (ppt+audio 74MB)
+</ul>
+Supplemental materials:
+<ul>
+<li>Landscape dynamics from lidar:
+    <a href="http://www4.ncsu.edu/~hmitaso/publwork/Mitasova_geomorph2011.pptx">Slides</a> and
+    <a href="http://proceedings.esri.com/library/userconf/geomorphometry11/videos/1-mitasova-lg.html">Keynote Video (56 minutes)</a>
+    from <a href="http://geomorphometry.org/content/geomorphometry-2011-programme">Geomorphometry 2011 conference</a>
+<li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/JR_DucthD_pres3.pptx">Jockey's Ridge Slides</a>
+    (ongoing research project on coastal landscape dynamics)
+</ul>
+
+
+<h3 id="viewshed_solar">Viewshed, solar energy potential analysis</h3>
+
+Outline:
+<ul>
+    <li>line of sight, viewshed and cumulative viewshed: principle and applications</li>
+    <li>solar radiation: components and dynamics</li>
+    <li>solar radiation in complex terrain, cast shadows</li>
+    <li>cumulative solar irradiation, solar energy potential</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lsolar.ppt">Lecture slides</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureViewshed_ed.mov">Lecture_Viewshed</a>
+         (ppt+audio 47MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureSolar_ed.mov">Lecture_Solar</a>
+        (ppt+audio 74MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="http://geomodelsolar.eu/">GeoModel Solar Website</a>
+</ul>
+
+
+<h3 id="hydrology">Flow tracing, watershed analysis</h3>
+
+Outline:
+<ul>
+    <li>cumulative terrain parameters based on flow tracing: definitions and general approach
+        (flow path length, flow accumulation, stream networks, watershed boundaries, ridge lines)
+    <li>methods for computing flow direction (D8, Dinf), flow tracing (SFD, MFD, uniform, weighted)
+    <li>methods for flow tracing through depressions and flat areas
+        (filling, carving, hybrid, least cost path)
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_Lflow.ppt">Lecture slides</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureFlowacc_ed.mov">Lecture_Flow accumulation</a> (ppt+audio 73MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureStreambasin_ed.mov">Lecture_Stream extraction and watersheds</a> (ppt+audio 106MB)
+</ul>
+
+<!--<hr><h3>Midterm </h3><hr>-->
+
+
+<h3 id="hydrology_2">Modeling Geospatial Processes: Hydrologic and erosion modeling</h3>
+
+Outline:
+<ul>
+    <li>spatially explicit modeling: principles and applications, role of GIS</li>
+    <li>geospatial aspects of models: spatially averaged and distributed models</li>
+    <li>general approaches and methods: empirical and physics based components of models</li>
+    <li>steady state, continuous time and dynamic models and related modeling tools</li>
+    <li>spatial hydrologic modeling: processes and methods</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_LHydroSpr2010.ppt">Lecture slides: Geospatial modeling and hydrology</a>
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureModelingGeo_ed.mov">Lecture Geospatial Modeling</a> (ppt+audio 79MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureModelingHydro_ed.mov">Lecture Geospatial Hydrologic Modeling</a> (ppt+audio 150MB)
+</ul>
+
+
+<h3 id="hydrology_erosion">Modeling Geospatial Processes: Erosion modeling</h3>
+
+Outline:
+<ul>
+    <li>spatial modeling of erosion, sediment transport and landscape evolution</li>
+    <li>deriving input parameters, analysis and visualization of modeling results</li>
+    <li>simulating impact of landuse and climate change</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="http://courses.ncsu.edu/mea582/common/GIS_anal_lecture/GIS_Anal_LErosionSpr2011.ppt">Lecture slides: Erosion modeling</a>
+<!--<li><a href="giserosion5.pdf">Review paper: Geospatial Erosion Modeling</a>-->
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureModelingErosion_ed.mov">Lecture Geospatial Erosion Modeling</a> (ppt+audio 120MB)
+    <li><a href="http://courses.ncsu.edu/mea582/common/media/04/LectureModelingErosionapp_ed.mov">Lecture Geospatial Erosion Modeling applications</a> (ppt+audio 60MB)
+</ul>
+Supplemental materials:
+<ul>
+    <li><a href="http://ncsu-osgeorel.github.io/erosion-modeling-tutorial/">Soil erosion and deposition modeling tutorial</a> (material under development)
+    <li><a href="http://www4.ncsu.edu/~hmitaso/gmslab/reports/CerlErosionTutorial/denix/denixstart.html">Erosion modeling tutorial</a> (old but useful document)
+</ul>
+
+<!--
+<hr>
+
+<h3 id="osgeo">GIS Analysis and Modeling with Open Source GIS</h3>
+
+Outline:
+<ul>
+    <li>Principles of open source software development and use</li>
+    <li>Open source geospatial foundation and its projects</li>
+    <li>Interoperability, OGC standards, combining open source and proprietary systems</li>
+    <li>Contributing to open source as developer and/or user</li>
+    <li>Examples of systems and applications</li>
+</ul>
+Lecture:
+<ul>
+    <li><a href="GIS_Anal_Losgeo.odp">Slides</a>
+</ul>
+-->
+
+</main>
+
+<footer>
+
+<nav>
+<ul>
+<li><a class="term-changes" href="https://moodle1516-courses.wolfware.ncsu.edu/course/view.php?id=4344">Moodle site</a></li>
+<li><a href="http://help.ncsu.edu/">Computing Help</a></li>
+<li><a href="http://geospatial.ncsu.edu/">GIST Home</a></li>
+<li><a href="http://www.ncsu.edu/policies/prr-disclaimer.php">Disclaimer</a></li>
+<li><a href="http://oit.ncsu.edu/itaccess">Accessibility</a></li>
+<!--
+<li><a href="https://github.com/ncsu-osgeorel/grass-intro-workshop" target='_blank'>GitHub repository</a></li>
+-->
+<li>
+    <a href="https://github.com/ncsu-osgeorel/geospatial-modeling-course" title="Source code for web pages on GitHub">
+        <img src="img/github_logo.png" alt="GitHub Octocat logo">
+    </a>
+</li>
+<li title="Copyright and license (not applicable to linked materials)">
+    &copy; 2015
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+    <a href="http://geospatial.ncsu.edu/osgeorel/">NCSU OSGeoREL</a>
+</li>
+</ul>
+</nav>
+
+</footer>
+
+</div>
+</div>
+
+</body>
+</html>
+

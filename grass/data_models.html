@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>GIS/MEA582: Geospatial Modeling and Analysis</title>
+
+<link rel="shortcut icon" href=".././img/favicon.ico" />
+
+<link href="../layout.css" rel="stylesheet" type="text/css" media="screen">
+<link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+
+</head>
+
+<body>
+
+<div id="outercontainer">
+<div id="container">
+
+<header>
+<div id="header-image">
+    <h1>NCSU GIS/MEA582:<br>Geospatial Modeling and Analysis</h1>
+</div>
+
+<nav>
+<ul class="nav">
+<li><a href="../index.html">Syllabus</a></li>
+<li><a href="../schedule.html">Schedule</a></li>
+<li><a href="../logistics.html">Course logistics</a></li>
+<li><a href="../lectures.html">Lectures</a></li>
+<li><a href="../assignments.html">Assignments</a></li>
+<li><a href="../projects.html">Projects</a></li>
+</ul>
+</nav>
+
+</header>
+
+<main>
+
+<!-- This is a generated file. Do not edit. -->
+<h2>Geospatial data models</h2>
+<!--Task: Resample raster data, convert between raster and vector data models-->
+<p>Resources:
+<ul>
+<li><a href="http://grass.osgeo.org/grass70/manuals/index.html">
+GRASS GIS overview and manual</a></li>
+<li> <a href="data_acquisition.html#commands">Recommendations</a>
+and <a href="http://www4.ncsu.edu/~akratoc/GRASS_intro/">tutorial</a>
+how to use wxGUI from the first assignment</li>
+</ul>
+
+<h3>Start GRASS GIS</h3>
+Start GRASS - click on GRASS icon or type<br>
+
+<pre><code>grass70
+</code></pre>
+
+<p>
+In startup pannel set <b>GIS Data Directory</b> to path to datasets,
+for example on MS Windows, <code>C:\Users\myname\grassdata</code>.<br>
+For <b>Project location</b> select nc_spm_08_grass7 (North Carolina, State Plane, meters) and
+for <b>Accessible mapset</b> create a new mapset (called e.g. HW_data_models).<br>
+Click <b>Start GRASS</b>.
+<p>
+If you prefer to work in GUI, you should be able to find out yourself
+the GUI equivalents for the tasks below.<br>
+Some hints for GUI are included, but
+from now on, most of the instructions will be provided as command line.<br>
+Hint for running most of the commands in GUI - type or paste the name of the module
+into the command console and then hit Enter to open the GUI dialog.<br>
+<em>Read</em> the manual page for each command you are using for the first time to learn
+what it is doing and what the parameters mean.
+
+<h3>Resampling to higher resolution</h3>
+
+<p>
+Resample the given raster map to higher and lower resolution
+(30m->10m, 30m->100m) and compare resampling by nearest neighbor
+with bilinear and bicubic method.
+<p>First, set the computation region extent to our study area
+and set resolution to 30 meters.
+The computational region (region for short) is set using
+<em class="module"><a href="https://grass.osgeo.org/grass70/manuals/g.region.html">g.region</a></em> module.
+Here for convenience we use named region which defines both the extent and the resolution.
+This named region is included in the data (location) we are using
+but it is possible to create new named regions and use them to bookmark different study areas.
+
+<pre><code>g.region region=swwake_30m -p
+</code></pre>
+
+<p>
+The <code>-p</code> flag for <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/g.region.html">g.region</a></em> is used to print the region
+we just set.
+
+<p>
+Then we display the 30m resolution NED elevation raster.
+
+<pre><code>d.rast elev_ned_30m
+</code></pre>
+
+<p>
+To resample it to 10m resolution, first set the computational region to resolution 10m,
+then resample the raster using the nearest neighbor method.<br>
+Hint: To open the <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.resamp.interp.html">r.resamp.interp</a></em> in GUI, type or paste the module name
+into the <em>Command console</em>, then <em>Enter</em> to open the GUI panel,
+don't forget to set the method to nearest under <em>Optional</em> tab.
+
+<pre><code>g.region res=10 -p
+r.resamp.interp elev_ned_30m out=elev_ned10m_nn method=nearest
+</code></pre>
+
+<p>
+<!--
+TODO: check how the resolution works in GUI, might be important when resampling
+Zoom to computational region in Map Display to set it to 10m resolution (equivalent to d.erase)<br>
+display the resampled map (Add Raster, if you don't have it it in the Layer Manager already)<br>
+-->
+
+Display the resampled map by adding "elev_ned10m_nn" to <em>Layer Manager</em>
+in case you don't have it in the Layer Manager already.<br>
+Alternatively, use in command line the following:
+
+<pre><code>d.rast elev_ned10m_nn
+</code></pre>
+
+<p>
+The elevation map "elev_ned10m_nn" looks the same as the original one,
+so now check the resampled elevation surface using the aspect map:
+
+<pre><code>r.slope.aspect elev_ned10m_nn aspect=aspect_ned10m_nn
+</code></pre>
+
+<p>
+Display the resampled map by adding "aspect_ned10m_nn" to <em>Layer Manager</em>
+or in command line using:
+
+<pre><code>d.rast aspect_ned10m_nn
+</code></pre>
+
+<p>
+Save the displayed map and <span class="question">explain what is going on in the report
+and how it differs from the aspect computed from the original elevation map?</span><br>
+To save the map, click in <em>Map Display</em> to on the button
+<em>Save display to graphic file"</em> or alternatively,
+use the following command:
+
+<pre><code>d.out.file aspect_nn
+</code></pre>
+
+<p>
+Now, reinterpolate DEMs using bilinear and bicubic interpolation.
+Check the interpolated elevation surfaces using aspect maps.
+
+<pre><code>r.resamp.interp elev_ned_30m out=elev_ned10m_bil meth=bilinear
+r.resamp.interp elev_ned_30m out=elev_ned10m_bic meth=bicubic
+r.slope.aspect elev_ned10m_bil aspect=aspect_ned10m_bil
+r.slope.aspect elev_ned10m_bic aspect=aspect_ned10m_bic
+d.rast aspect_ned10m_bil
+d.rast aspect_ned10m_bic
+</code></pre>
+
+<p>
+Save the displayed map and in your report, compare the result with
+the previously computed nearest neighbor result.<br>
+In <em>Map Display</em> click button <em>Save display to graphic file</em>,
+or use the following in the command line:
+
+<pre><code>d.out.file aspect_bic
+</code></pre>
+
+<h3>Resampling to lower resolution</h3>
+
+<p>
+Resample to lower resolution (30m -> 100m).
+<p>
+First, display the original elevation and land use maps:
+
+<pre><code>d.rast elev_ned_30m
+d.rast landuse96_28m
+</code></pre>
+
+Then change the region resolution and resample
+elevation (which is a continuous field)
+and land use (which has discrete categories).<br>
+<span class="question">Explain selection of aggregation method. Can we use average also for landuse?
+What does mode mean?</span>
+<!--
+<p>Reminder: d.erase indicates that you should remove all map layers
+from <em>Layer Manager</em>.
+-->
+
+<!--
+Not using the following because it might be more advantageous to look at some smaller region.
+Also, make sure that your <em>Map Display</em>
+is zoomed to computational region or to newly created maps (this should be the same).
+-->
+
+<pre><code>g.region res=100 -p
+r.resamp.stats elev_ned_30m out=elev_new100m_avg method=average
+d.rast elev_new100m_avg
+</code></pre>
+
+Before the next computation, remove all map layers from the <em>Layer Manager</em>
+because we don't need to see them anymore.
+
+<pre><code><!-- d.erase -->
+r.resamp.stats landuse96_28m out=landuse96_100m method=mode
+d.rast landuse96_100m
+</code></pre>
+
+<p>
+Remove or switch off the land use, elevation and aspect maps.
+<!--
+or use d.erase in command line:
+<pre><code>d.erase
+</code></pre>
+-->
+
+
+<h3>Converting between vector data types</h3>
+
+<p>
+Convert census blocks polygons to points using their centroids
+(useful for interpolating a population density trend surface):
+
+<pre><code>v.to.points census_wake2000 type=centroid out=census_centr use=vertex
+</code></pre>
+
+Display census boundaries using GUI:<br>
+<em>Add vector</em> "census_wake2000"
+<em>Selection</em> > <em>Feature type</em> > <em>boundary</em>
+(switch off the other types).<br>
+Save the displayed map in <em>Map Display</em> click button
+<em>Save display to graphic file</em>.<br>
+Alternatively, use the following commands to control display.
+<p>
+Note that in both command line and GUI you must either enter the full path
+to the file you are saving the image in, or you must know the current working
+directory.
+
+<pre><code>d.vect census_centr icon=basic/circle fcol=green size=10 
+d.vect census_wake2000 col=red  type=boundary
+d.out.file vect_to_points
+</code></pre>
+
+Convert contour lines to points (useful for computing DEM from contours):
+
+<pre><code>v.to.points input=elev_ned10m_cont10m output=elev_ned_contpts type=line use=vertex
+</code></pre>
+
+Display the "elev_ned_contpts" points vector and zoom-in to very small area
+to see the actual points.
+
+<pre><code>d.vect elev_ned_contpts co=brown icon=basic/point size=3
+</code></pre>
+
+
+<h3>Convert from vector to raster</h3>
+
+<p>
+Convert vector data to raster for use in raster-based analysis.
+First, adjust the computational region to resolution 200m:
+
+<pre><code>g.region swwake_30m res=200 -p
+</code></pre>
+
+Then remove all layers from the <em>Layer Manager</em>.
+<!--
+or use d.erase in command line:
+<pre><code>d.erase
+</code></pre>
+-->
+
+<p>
+Convert vector points "schools" to raster.
+As value for raster use attribute column "CORECAPACI" for core capacity.<br>
+To add legend in GUI use
+<em>Add map elements</em> > <em>Show/hide legend</em>
+and select "schools_cap_200m".
+
+<pre><code>d.vect schools_wake 
+v.info -c schools_wake
+v.to.rast schools_wake out=schools_cap_200m use=attr attrcol=CORECAPACI type=point
+d.rast schools_cap_200m
+d.vect streets_wake co=grey
+d.legend schools_cap_200m at=70,30,2,6
+</code></pre>
+
+<p>
+Now convert lines in "streets" vector to raster.
+Set the resolution to 30m and use speed limit attribute.
+
+<pre><code>g.region res=30 -p
+v.to.rast streets_wake out=streets_speed_30m use=attr attrcol=SPEED type=line
+</code></pre>
+
+<p>
+If you haven't done this already, add remove all other map layers
+from <em>Layer Manager</em> and add "streets_speed_30m" raster layer.<br>
+Add legend for "streets_speed_30m" raster using GUI in <em>Map Display</em>:<br>
+<em>Add legend</em> > <em>Set Options</em> > <em>Advanced</em> > <em>List of discrete cat numbers</em>
+and type in speed limits 25,35,45,55,65; move legend with mouse as needed.
+<p>
+Alternatively, use the following commands:
+
+<pre><code><!-- d.erase -->
+d.rast streets_speed_30m 
+d.legend streets_speed_30m at=5,30,2,5 use=25,35,45,55,65 
+</code></pre>
+
+<p>
+Save the displayed map.
+In <em>Map Display</em> click button <em>Save display to graphic file</em>,
+or use the following.
+
+<pre><code>d.out.file vect_to_rast
+</code></pre>
+
+<p>
+<!--
+# areas: geology ID with labels
+g.region swwake_30m -p
+v.to.rast geology out=mygeology_30m use=attr col=GEOL250_ID labelcolu=GEO_NAME
+d.rast mygeology_30m
+d.rast -o roadsmajor
+d.legend mygeology_30m use=948,921,910,862,766,720,583,405,270,217 at=70,20,2,6
+-->
+
+<h3>Convert from raster to vector</h3>
+
+Convert raster lines to vector lines.
+<p>
+First, set the region and remove map layers from <em>Layer Manager</em>.
+Then do the conversion.
+<p>
+<span class="question">Explain why we are using <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.thin.html">r.thin</a></em> module</span>.
+You may want to remove all previously used layers from the <em>Layer Manager</em>
+before you start these new computations.
+
+<pre><code><!-- d.erase -->
+g.region raster=streams_derived -p
+d.rast streams_derived
+r.thin streams_derived output=streams_derived_t
+r.to.vect streams_derived_t output=streams_derived_t type=line
+</code></pre>
+
+<p>
+Visually compare the result with streams digitized from airphotos.
+
+<pre><code>d.vect streams_derived_t color=blue
+d.vect streams color=red
+</code></pre>
+
+<p>
+Save the displayed map (in Map Display click button <em>Save display to graphic file</em>).
+
+<pre><code>d.out.file streams_compare
+</code></pre>
+
+<p>
+Convert raster areas representing basins to vector polygons.
+<p>
+Use raster value as category number (flag -v) and 
+display vector polygons filled with random colors.<br>
+In GUI: Add vector > Colors > Switch on Random colors.
+You may want to remove all previously used layers from the <em>Layer Manager</em>
+before you start these new computations.
+
+<pre><code>g.region raster=basin_50K -p
+<!-- d.erase -->
+d.rast basin_50K
+r.to.vect -sv basin_50K output=basin_50Kval type=area
+d.vect -c basin_50Kval
+d.vect streams color=blue
+</code></pre>
+
+<p>
+Save the displayed map either using GUI or using the following in case
+you are working in the command line.
+
+<pre><code>d.out.file basins
+</code></pre>
+
+
+<h3>Import and export for raster and vector data</h3>
+
+<p>
+In this section we will cover importing and exporting of raster and vector
+data which are in the same projection as the GRASS location we work in.
+
+To get screen captures of importing and exporting data
+visit
+<a href="http://grasswiki.osgeo.org/wiki/Importing_data">Importing data</a>
+page and
+<a href="http://grasswiki.osgeo.org/wiki/WxGUI/Video_tutorials">Video tutorials</a>
+page at GRASS Wiki.
+
+
+<h4>Import and export Shapefiles</h4>
+
+Download Shapefile with geodetic points:
+<a href="http://courses.ncsu.edu/mea582/common/GIS_anal_grass/geod_pts_spm.zip">geod_pts_spm.zip</a>.
+Save and unzip it on Desktop or a directory where you have read/write permissions.
+
+<p>
+To import file in GUI use:
+<ul>
+<li><em>File</em> > <em>Import vector data</em> > <em>Common import formats</em>.</li>
+<li>In the dialog, select <em>Source type</em> > <em>Directory</em>.</li>
+<li>Use <em>Browse</em> button to find the path to the directory "geod_pts_spm"
+to fill the <em>Source name</em> field.</li>
+<li>Then click on <em>Import</em> button.</li>
+</ul>
+<!--
+Zoom to computational region to keep the spatial extent at working region<br>
+-->
+In case the imported point data was not displayed automatically,
+use <em>Add vector</em> to display the data
+and zoom to the vector layer.<br>
+Compare the imported vector with "streets_wake" vector
+to see how they are distributed.
+
+<p>
+Export the roadsmajor map as a shape file:
+<ul>
+<li><em>File</em> > <em>Export</em> > <em>Common formats</em></li>
+<li>Select roadsmajor as <em>Name of input vector map</em></li>
+<li>Type C:\mydirectory\roadsmajor path as OGR output datasource name
+(path should be to a directory where you have write permission)</li>
+<li>click <em>Run</em></li>
+</ul>
+You can then display the roadsmajor in ArcGIS.
+
+<h4>Import and export of vectors when scripting</h4>
+
+<p>
+For scripting workflows a command line import/export can be used.<br>
+It requires properly set path to external files.
+In this case, "gdc.shp" would be replaced, e.g. by "C:\path_to_my_file\gdc.shp"
+on MS Windows and by "/path_to_my_file/gdc.shp" on unix-like systems.
+And the full path, e.g. "C:\path_to_my_file\roadsmajor.shp", would be used
+instead of "roadsmajor.shp".
+
+<pre><code>v.in.ogr input=gdc.shp output=geodetic_points
+v.out.ogr input=roadsmajor output=roadsmajor.shp
+</code></pre>
+
+On MS Windows it is often easier to do the import through GUI
+to get the correct path to your data.<br>
+On Mac, Linux and other systems you can use current working directory
+and/or auto-complete in the system command line to avoid typing the full path;
+you can of course use GUI if you prefer.
+
+
+<h4>Import raster file provided in GeoTIFF format</h4>
+
+<p>
+Download a landuse raster in GeoTIFF format (referenced TIFF image):
+<a href="http://courses.ncsu.edu/mea582/common/GIS_anal_grass/lc96ras_cut.tif">lc96ras_cut.tif</a>.
+Save it on Desktop or in a directory of your choice.
+<p>
+To import file in GUI use:
+<em>File</em> > <em>Import raster data</em> > <em>Common import formats</em>.
+Keep the default <em>GeoTIFF</em> as the <em>Format</em>
+and use <em>Browse</em> button to find the path to downloaded "lc96ras_cut.tif" file.<br>
+Make sure the file is checked on in the <em>List of GDAL layers</em>.
+Click <em>Import</em>.
+
+<p>
+On MS Windows, the import is often easier to do through GUI because of getting
+the correct path to your data. In general, you can use the
+command line alternative below.<br>
+Note that it requires you to provide a full path to your input data,
+so you would have to replace "lc96ras_cut.tif" by something
+like "C:\path_to_my_file\lc96ras_cut.tif" or
+"/path_to_my_file/lc96ras_cut.tif" depending on the location of data
+and platform you are using.
+
+<pre><code>r.in.gdal input=lc96ras_cut.tif output=landuse96_subset
+</code></pre>
+
+<h4>Exporting raster files as ASCII grid and GeoTIFF</h4>
+
+<p>
+Now, export raster files as ASCII grid and GeoTIFF.
+<p>
+Use <em>File</em> > <em>Export raster map</em> > <em>Common export formats</em>.<br>
+Do not forget to specify the full path to your output files otherwise you might
+have hard time finding them especially on MS Windows.<br>
+Alternatively, you can use command line but again, don't forget to specify
+full path to output file or set your working directory to desired location.
+
+<pre><code>r.out.gdal input=elev_ned_30m output=elev_ned_30m.ascii format=AAIGrid
+r.out.gdal input=basin_50K output=basin_50K.tif
+</code></pre>
+
+<h4>Optional: Add WMS layer</h4>
+View and download orthophoto through web mapping service.
+Please test these tasks and report whether they worked without problems.<br>
+First change region to the small rural area and display the provided orthophoto.
+
+<pre><code>g.region rural_1m -p
+d.rast ortho_2001_t792_1m
+</code></pre>
+
+<p>
+In Layer Manager toolbar <em>Add web service layer</em>.<br>
+Paste the link to the service into server field and press connect:<br>
+<pre>
+http://services.nconemap.com/arcgis/services/Imagery/Orthoimagery_All/ImageServer/WMSServer?
+</pre>
+Wait until GUI changes. Be patient, it can take up to one minute.<br>
+In list of layers, there should be "Orthoimagery_All", click on that.<br>
+Press Add layer button and wait.<br>
+The dialog can be closed afterwards.<br>
+
+<p>
+To save the layer:<br>
+Right click on the web service layer in Layer Manager - choose <em>Save web service layer</em>.
+In dialog, set the name of the layer ortho_new and press <em>Save layer</em>.<br>
+
+
+<!--
+Note that there are different ASCII grid formats, so you must always keep
+in mind which one you are using. However, all of them are highly readable
+even by your custom scripts.
+-->
+
+<!--
+Learn how to 
+<a href="http://courses.ncsu.edu/gis582/common/media/GRASS_clinic2013/NewLocCSTransfGRASS.html">set up a new project</a>
+
+<font color="#000066">
+# To view non-GRASS native files (such as ESRI shape files or ArcGRIDs) use the
+# commands v.external and r.external. Note that data accessed through the
+# external commands is for display only. You cannot run analyses, edit, or
+# otherwise manipulate the contents from within GRASS unless you first import it
+# into your GRASS database.
+# for viewing only use File>Link external formats>Link external vector data
+#
+# to display an ESRI shape file...
+</font>
+v.external dsn=yourpath/WakeLakes_2003/ output=wake_lakes layer=wakelakes_2003
+d.vect wake_lakes
+<font color="#000066">
+# to display an external raster data set (in this case an orthophoto)...
+# NOTE: As of this writing there is a problem with the command r.external 
+# that prevents the display of the externally linked data. 
+# GRASS Development Team is aware of the problem, and a fix is in the works. 
+# Until that fix arrives, however, you're advised to skip
+# this portion of the assignment. The command is commented out for this reason.
+# r.external input=yourpath/ortho_2001_t792.tif output=ortho_2001_t792_30m
+
+</font>
+r.in.poly input="C:\Grassdata\polygon.txt"
+-->
+
+</main>
+
+<footer>
+
+<nav>
+<ul>
+<li><a class="term-changes" href="https://moodle1516-courses.wolfware.ncsu.edu/course/view.php?id=4344">Moodle site</a></li>
+<li><a href="http://help.ncsu.edu/">Computing Help</a></li>
+<li><a href="http://geospatial.ncsu.edu/">GIST Home</a></li>
+<li><a href="http://www.ncsu.edu/policies/prr-disclaimer.php">Disclaimer</a></li>
+<li><a href="http://oit.ncsu.edu/itaccess">Accessibility</a></li>
+<!--
+<li><a href="https://github.com/ncsu-osgeorel/grass-intro-workshop" target='_blank'>GitHub repository</a></li>
+-->
+<li>
+    <a href="https://github.com/ncsu-osgeorel/geospatial-modeling-course" title="Source code for web pages on GitHub">
+        <img src="../img/github_logo.png" alt="GitHub Octocat logo">
+    </a>
+</li>
+<li title="Copyright and license (not applicable to linked materials)">
+    &copy; 2015
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>
+    <a href="http://geospatial.ncsu.edu/osgeorel/">NCSU OSGeoREL</a>
+</li>
+</ul>
+</nav>
+
+</footer>
+
+</div>
+</div>
+
+</body>
+</html>
+
