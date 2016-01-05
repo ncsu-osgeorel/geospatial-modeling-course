@@ -177,7 +177,7 @@ To create color table for future multiple uses
 type the rules into a plain text mycolor.txt file
 using a text editor (TextEdit, Notepad), for example:
 
-<pre>
+<pre data-filename="mycolor.txt">
 50 blue
 70 aqua
 90 green
@@ -192,9 +192,11 @@ Right click on "myelev" map layer > <em>set color table</em> > <em>Define</em> >
 If needed, redraw using the second button on Map Display.
 You can also create and assign the above color table by typing or pasting it into the
 <em>enter values interactively</em> window
-or run it from comand line (make sure you have the correct path):
+or run it from comand line (make sure you have the correct path,
+in the following example <code>mycolor.txt</code> should be replaced
+by e.g. /Users/john/mycolor.txt on Mac OS X):
 
-<pre><code>r.colors myelev rules=/Users/helena/mycolor.txt
+<pre><code>r.colors myelev rules=mycolor.txt
 </code></pre>
 
 <p>
@@ -274,9 +276,11 @@ v.out.ogr precip_30ynormals output=c:\temp\precipitation.kml format=KML type=poi
 </code></pre>
 
 <h3>Optional part</h3>
-Please test these tasks and report whether they worked without problems:
+
 <h4>Add WMS layer</h4>
 View and download orthophoto through web mapping service.
+Requires good internet connection. If it doesn't work, report the problem
+including any error message in the report.<br>
 First change region to the small rural area and display the provided orthophoto.
 
 <pre><code>g.region rural_1m -p
