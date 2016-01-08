@@ -48,7 +48,8 @@ When starting a project, decide which CRS you will use. Create
 a new Location using Location Wizard (accessible from GRASS GIS start-up page).
 Specify desired CRS either by providing
 EPSG code (can be found e.g. at <a href="http://epsg.io/">epsg.io</a>)
-or by providing a georeferenced file (such as Shapefile) which has the CRS you want.
+or by providing a georeferenced file (such as Shapefile) which has
+the CRS you want.
 
 <h3>Importing data in common vector and raster formats</h3>
 
@@ -67,21 +68,23 @@ First create a new temporary Location
 based on the CRS of the data you want to import, switch to this Location
 and then use <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.in.gdal.html">r.in.gdal</a></em> or <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.ogr.html">v.in.ogr</a></em>
 to import raster and vector data, respectively. Then switch to the Location
-of your project and use <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.proj.html">r.proj</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.proj.html">v.proj</a></em>
+of your project and use
+<em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.proj.html">r.proj</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.proj.html">v.proj</a></em>
 to reproject data from the temporary Location to your project Location.
 This approach is necessary for formats which are not supported by
-<em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.import.html">r.import</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.import.html">v.import</a></em> modules.  
+<em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.import.html">r.import</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.import.html">v.import</a></em> modules.
 Modules  <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.proj.html">r.proj</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.proj.html">v.proj</a></em>
 can be also used for bringing raster and vector maps from one Location to another.
 
 <p>
 Modules <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.in.gdal.html">r.in.gdal</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.ogr.html">v.in.ogr</a></em>
 check whether the CRS of the imported data matches the Location's CRS.
-Sometimes the CRS of imported data is not specified correctly or is missing and therefore
-import fails. If you know that the actual CRS matches the Location's CRS,
+Sometimes the CRS of imported data is not specified correctly
+or is missing and therefore import fails.
+If you know that the actual CRS matches the Location's CRS,
 it is appropriate to use <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.in.gdal.html">r.in.gdal</a></em>'s
-or <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.ogr.html">v.in.ogr</a></em>'s -o flag to overwrite the projection check and import
-the data as they are.
+or <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.ogr.html">v.in.ogr</a></em>'s -o flag to overwrite the projection
+check and import the data as they are.
 
 <p>
 If you zoom to raster or vector in GRASS GUI and it does not fit with
@@ -121,7 +124,8 @@ Notice, we have to specify the column number where the X and Y (optionally Z)
 coordinates are stored. In this example, X coordinates are in the first column
 Y in the second one. Don't forget to specify correct column delimiter.
 <p>
-If the data are not in the CRS we are using, create a new Location with matching CRS,
+If the data are not in the CRS we are using, create a new Location
+with matching CRS,
 import the data and use <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.proj.html">v.proj</a></em> as described above.
 
 
@@ -181,7 +185,8 @@ to get only ground points):
 <pre><code>v.in.lidar input=tile_0793_016_spm.las output=tile_0793_016 class=2 -r -t -b
 </code></pre>
 
-This import only the points of class 2 (ground) in the current computational region
+This import only the points of class 2 (ground)
+in the current computational region
 without the attribute table and building the topology.
 Then we follow with interpolation using,
 e.g. <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.surf.rst.html">v.surf.rst</a></em> module:
@@ -207,11 +212,12 @@ into NAD83/North Carolina in meters (EPSG:3358):
 
 Modules <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.in.lidar.html">r.in.lidar</a></em> and <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.lidar.html">v.in.lidar</a></em>
 check whether the CRS of the imported data matches the Location's CRS.
-Sometimes the CRS of imported data is not specified correctly or is missing and therefore
-import fails. If you know that the actual CRS matches the Location's CRS,
+Sometimes the CRS of imported data is not specified correctly
+or is missing and therefore import fails.
+If you know that the actual CRS matches the Location's CRS,
 it is appropriate to use <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/r.in.lidar.html">r.in.lidar</a></em>'s
-or <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.lidar.html">v.in.lidar</a></em>'s -o flag to overwrite the projection check and import
-the data as they are.
+or <em class="module"><a href="https://grass.osgeo.org/grass70/manuals/v.in.lidar.html">v.in.lidar</a></em>'s -o flag to overwrite the projection
+check and import the data as they are.
 
 <pre><code>r.in.lidar input=tile_0793_016_spm.las -s -o
 </code></pre>
