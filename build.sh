@@ -2,11 +2,16 @@
 
 # builds pages from source
 
+# URL of the new version
+URL="http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/"
+
 function build_page {
     FILE_SOURCE=$1
     FILE_TARGET=$2
     cat $HEAD_FILE > $OUTDIR/$FILE_TARGET
     echo "<!-- This is a generated file. Do not edit. -->" >> $OUTDIR/$FILE_TARGET
+    FILE=$FILE_TARGET
+    echo "<div style=\"background-color: #FA8; border: 4px solid #F00; padding: 10px;\"><p>This is an unmaintained course material, please see current material at:<ul><li><a href=\"$URL\">$URL</a></li><li><a href=\"$URL$FILE\">$URL$FILE</a> (likely URL)</li></ul></div>" >> $OUTDIR/$FILE_TARGET
     ./edit.py < $FILE_SOURCE >> $OUTDIR/$FILE_TARGET
     cat $FOOT_FILE >> $OUTDIR/$FILE_TARGET
 }
@@ -39,6 +44,7 @@ do
         TGT_FILE=$OUTDIR/$DIR/`basename $FILE`
         ./increase-link-depth.py < $HEAD_FILE > $TGT_FILE
         echo "<!-- This is a generated file. Do not edit. -->" >> $TGT_FILE
+        echo "<div style=\"background-color: #FA8; border: 4px solid #F00; padding: 10px;\"><p>This is an unmaintained course material, please see current material at:<ul><li><a href=\"$URL\">$URL</a></li><li><a href=\"$URL$FILE\">$URL$FILE</a> (likely URL)</li></ul></div>" >> $TGT_FILE
         ./edit.py < $FILE >> $TGT_FILE
         ./increase-link-depth.py < $FOOT_FILE >> $TGT_FILE
     done
@@ -70,6 +76,8 @@ DIR="grass"
 TGT_FILE=$OUTDIR/$DIR/index.html
 ./increase-link-depth.py < $HEAD_FILE > $TGT_FILE
 echo "<!-- This is a generated file. Do not edit. -->" >> $TGT_FILE
+FILE=$DIR/index.html
+echo "<div style=\"background-color: #FA8; border: 4px solid #F00; padding: 10px;\"><p>This is an unmaintained course material, please see current material at:<ul><li><a href=\"$URL\">$URL</a></li><li><a href=\"$URL$FILE\">$URL$FILE</a> (likely URL)</li></ul></div>" >> $TGT_FILE
 ./generate-index.py "$TITLE" "$HEAD_TEXT" "$FOOT_TEXT" $DIR/ $FILES >> $TGT_FILE
 ./increase-link-depth.py < $FOOT_FILE >> $TGT_FILE
 
